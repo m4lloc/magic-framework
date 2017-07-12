@@ -8,23 +8,19 @@
 
     public function after() { }
 
-    public function index() {
+    public function index($params = []) {
       return false;
     }
 
-    public function show() {
+    public function show($params = []) {
       return false;
     }
 
-    public function edit() {
+    public function edit($params = []) {
       return false;
     }
 
-    public function __ajax() {
-      return false;
-    }
-
-    public function __post() {
+    public function update($params = []) {
       return false;
     }
   }
