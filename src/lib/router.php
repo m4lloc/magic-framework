@@ -50,15 +50,16 @@
     }
 
     private function defaults() {
-      Router::draw(['GET','POST'], '/', '\\Magic\\Controller\\Homepage');
-
-      $controllers = glob('{'. App::$VENDOR_DIR .'/../app/controllers/*.php,'. App::$VENDOR_DIR .'/*/*/src/app/controllers/*.php}', GLOB_BRACE);
+      $controllers = glob('{'. App::$VENDOR_DIR .'/../app/controller/*.php,'. App::$VENDOR_DIR .'/*/*/src/app/controller/*.php}', GLOB_BRACE);
       foreach($controllers as $controller) {
-        $controller = basename($controller, '.php');
+        $basename = strtolower(basename($controller, '.php'));
+        $path = str_replace('_', '-', $basename);
+        $controller = '\\Magic\\Controller\\'. str_replace(' ', '', ucwords(str_replace('_', ' ', $basename)));
 
-        // Router::get('/'. $controller, '\\Magic\\Controller\\'. ucfirst($controller) .'::index');
-        // Router::get('/'. $controller .'/{id:\d+}', '\\Magic\\Controller\\'. ucfirst($controller) .'::index');
-        // Router::post('/'. $controller  .'/{id:\d+}', '\\Magic\\Controller\\'. ucfirst($controller) .'::index');
+        self::get('/'. $path, $controller .'::index');
+        self::get('/'. $path .'/{id:\d+}', $controller .'::show');
+        self::post('/'. $path  .'/{id:\d+}', $controller .'::update');
       }
+      self::draw(['GET','POST'], '/', '\\Magic\\Controller\\Homepage');
     }
   }
