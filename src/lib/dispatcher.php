@@ -4,11 +4,16 @@
 
   class Dispatcher {
 
-    private $route = false;
+    private $route;
+    private $class;
+    private $method;
+    private $params;
 
     public function load() {
       $this->determine_route();
-      $this->invoke_controller();
+      $this->determine_controller();
+      $this->invoke();
+      $this->render();
     }
 
     private function determine_route() {
@@ -29,27 +34,44 @@
       $this->route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $uri);
     }
 
-    private function invoke_controller() {
-      var_dump($this->route);
-
+    private function determine_controller() {
       switch($this->route[0]) {
         case \FastRoute\Dispatcher::NOT_FOUND:
-          echo 'NOT_FOUND'. PHP_EOL;
-          $controller = new \Magic\Controller\PageNotFound();
-          $controller->index();
+          die('404');
+          $this->class = '\\Magic\\Controller\\PageNotFound';
           break;
         case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-          echo 'METHOD_NOT_ALLOWED'. PHP_EOL;
-          $allowedMethods = $routeInfo[1];
-          $controller = new \Magic\Controller\MethodNotAllowed();
-          $controller->index();
+          die('Not allowed');
+          $this->class = '\\Magic\\Controller\\MethodNotAllowed';
+          $params = ['allowed_methods' => $this->route[1]];
           break;
         case \FastRoute\Dispatcher::FOUND:
-          echo 'FOUND'. PHP_EOL;
-          $handler = $routeInfo[1];
-          $vars = $routeInfo[2];
-          // ... call $handler with $vars
+          list($this->class, $this->method) = explode('::', $this->route[1]);
           break;
+        default:
+          die('No route');
+          $this->class = '\\Magic\\Controller\\NoRouteFound';
       }
+      if(!isset($this->method) || empty($this->method)) {
+        $this->method = 'index';
+      }
+    }
+
+    private function invoke() {
+      $controller = new $this->class;
+      var_dump($controller);
+      $controller->before();
+      $controller->{$this->method}($this->params);
+      $controller->after();
+    }
+
+    private function render() {
+      die('Hello');
+      $basename = end(explode('\\', $this->class));
+      $tpl = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $basename));
+      var_dump($tpl);
+      // view::assign('params', $this->params);
+      // view::assign('body', view::fetch('controllers/'. $tpl);
+      // view::display('index');
     }
   }
