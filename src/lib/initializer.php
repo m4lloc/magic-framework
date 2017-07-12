@@ -50,7 +50,7 @@
     private function run() {
       foreach($this->initializers as $initializer) {
         $init = new $initializer;
-        $init->run();
+        $init->init();
       }
     }
   }
