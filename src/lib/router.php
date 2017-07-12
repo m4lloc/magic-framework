@@ -15,11 +15,14 @@
     }
 
     public static function draw($method, $route_pattern, $handler) {
-      self::$routes[] = [
+      $route = [
         'method' => $method,
         'route_pattern' => $route_pattern,
         'handler' => $handler
       ];
+      if(!self::exists($route)) {
+        self::$routes[] = $route;
+      }
     }
 
     public static function get($route_pattern, $handler) {
@@ -32,6 +35,10 @@
 
     private function retrieve() {
       $this->route_files = glob('{'. App::$VENDOR_DIR .'/../app/config/routes.php,'. App::$VENDOR_DIR .'/*/*/src/app/config/routes.php}', GLOB_BRACE);
+    }
+
+    private static function exists($route) {
+      return in_array($route, self::$routes);
     }
 
     private function require_files() {
