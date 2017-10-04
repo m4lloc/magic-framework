@@ -59,19 +59,19 @@
 
     private function invoke() {
       $controller = new $this->class;
-      var_dump($controller);
+      // var_dump($controller);
       $controller->before();
       $controller->{$this->method}($this->params);
       $controller->after();
     }
 
     private function render() {
-      die('Hello');
-      $basename = end(explode('\\', $this->class));
+      $basename = explode('\\', $this->class);
+      $basename = end($basename);
       $tpl = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $basename));
-      var_dump($tpl);
-      // view::assign('params', $this->params);
-      // view::assign('body', view::fetch('controllers/'. $tpl);
-      // view::display('index');
+      // var_dump($tpl);
+      View::assign('params', $this->params);
+      View::assign('body', View::fetch('../app/view/controller/'. $tpl .'/'. $this->method));
+      View::display('index');
     }
   }

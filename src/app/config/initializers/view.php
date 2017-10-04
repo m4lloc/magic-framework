@@ -1,8 +1,9 @@
 <?php
 
-  // clearstatcache();
-  //
-  // require_once( 'smarty/Smarty.class.php' );
-  //
-  // view::set_template_dir( '../view' );
-  // view::set_compile_dir( '../tmp/compile' );
+  clearstatcache();
+
+  \Magic\View::set_template_dir([
+    '../app/view',
+    '../vendor/m4lloc/magic-framework/src/app/view'
+  ]);
+  // \Magic\view::set_compile_dir('../tmp/compile');
