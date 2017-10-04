@@ -20,6 +20,6 @@
 
   namespace Magic\Controller;
 
-  class MethodNotAllowed extends \Magic\Controller {
-    use MethodNotAllowedDecorator;
+  class PageNotFound extends \Magic\Controller\Base\PageNotFound {
+    use PageNotFoundDecorator;
   }

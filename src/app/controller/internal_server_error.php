@@ -1,9 +1,25 @@
 <?php
 
+  /*****************************************************
+   * This object is necessary for the decorator
+   * pattern. The \Magic\Controller\Base\<class>
+   * contains the default functionality if existing.
+   *
+   * When the user creates an trait with the namespace
+   * __NAMESPACE__ and name __CLASS__Decorator it will
+   * overwrite the existing methods in the base class.
+   *****************************************************
+   *
+   * namespace __NAMESPACE__;
+   *
+   * trait __CLASS__Decorator {
+   *
+   * }
+   *
+   */
+ 
   namespace Magic\Controller;
 
   class InternalServerError extends \Magic\Controller {
-    public function index() {
-      echo '<h1>500 - Internal server error</h1>';
-    }
+    use InternalServerErrorDecorator;
   }
