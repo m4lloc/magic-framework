@@ -37,11 +37,9 @@
     private function determine_controller() {
       switch($this->route[0]) {
         case \FastRoute\Dispatcher::NOT_FOUND:
-          die('404');
           $this->class = '\\Magic\\Controller\\PageNotFound';
           break;
         case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-          die('Not allowed');
           $this->class = '\\Magic\\Controller\\MethodNotAllowed';
           $params = ['allowed_methods' => $this->route[1]];
           break;
@@ -49,7 +47,6 @@
           list($this->class, $this->method) = explode('::', $this->route[1]);
           break;
         default:
-          die('No route');
           $this->class = '\\Magic\\Controller\\NoRouteFound';
       }
       if(!isset($this->method) || empty($this->method)) {
