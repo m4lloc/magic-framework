@@ -1,13 +1,13 @@
 <?php
 
-  namespace Magic;
+  namespace M;
 
   class App {
 
     public static $VENDOR_DIR = '';
 
     public function __construct() {
-      self::$VENDOR_DIR = dirname(dirname(dirname(dirname(dirname(__FILE__))))); // PHP7: $vendor_dir = dirname(__FILE__, 5);
+      self::$VENDOR_DIR = dirname(__FILE__, 5);
     }
 
     public function run() {

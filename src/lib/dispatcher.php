@@ -1,6 +1,6 @@
 <?php
 
-  namespace Magic;
+  namespace M;
 
   class Dispatcher {
 
@@ -18,15 +18,14 @@
 
     private function determine_route() {
       $dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r) {
-        foreach(\Magic\Router::$routes as $route) {
+        foreach(\M\Router::$routes as $route) {
           $r->addRoute($route['method'], $route['route_pattern'], $route['handler']);
         }
       });
 
-      $uri = $_SERVER['REQUEST_URI'];
-
       // Strip query string (?foo=bar) and decode URI
-      if (false !== $pos = strpos($uri, '?')) {
+      $uri = $_SERVER['REQUEST_URI'];
+      if(false !== $pos = strpos($uri, '?')) {
           $uri = substr($uri, 0, $pos);
       }
       $uri = rawurldecode($uri);
@@ -42,6 +41,15 @@
         case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
           $this->class = '\\Magic\\Controller\\MethodNotAllowed';
           $params = ['allowed_methods' => $this->route[1]];
+          echo 'NOT_FOUND'. PHP_EOL;
+          $c = new \M\Controller\PageNotFound();
+          $c->index();
+          break;
+        case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+          echo 'METHOD_NOT_ALLOWED'. PHP_EOL;
+          // $allowedMethods = $routeInfo[1];
+          $c = new \M\Controller\MethodNotAllowed();
+          $c->index();
           break;
         case \FastRoute\Dispatcher::FOUND:
           list($this->class, $this->method) = explode('::', $this->route[1]);

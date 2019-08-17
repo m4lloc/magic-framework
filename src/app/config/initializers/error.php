@@ -1,6 +1,6 @@
 <?php
 
-  class error extends \Magic\Initializer {
+  class error extends \M\Initializer {
 
     public function init() {
       if(getenv('MAGIC_SENTRY_ENABLED') == 'true') {

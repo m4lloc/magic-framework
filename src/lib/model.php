@@ -297,7 +297,7 @@
 		}
 
 		private function prepare() {
-      $db = \Magic\Core\Model\Connect::get_instance();
+      $db = \M\Core\Model\Connect::get_instance();
       return $db->prepare($this->sql);
 		}
 

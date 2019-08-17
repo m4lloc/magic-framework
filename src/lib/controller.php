@@ -1,6 +1,6 @@
 <?php
 
-  namespace Magic;
+  namespace M;
 
   abstract class Controller {
 
@@ -20,7 +20,13 @@
       return false;
     }
 
-    public function update($params = []) {
+    public function update($params = []) { }
+    
+    public function __xhr() {
+      return false;
+    }
+
+    public function __post() {
       return false;
     }
   }

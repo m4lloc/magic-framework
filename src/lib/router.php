@@ -50,7 +50,9 @@
     }
 
     private function defaults() {
-      $controllers = glob('{'. App::$VENDOR_DIR .'/../app/controller/*.php,'. App::$VENDOR_DIR .'/*/*/src/app/controller/*.php}', GLOB_BRACE);
+      Router::draw(['GET','POST'], '/', '\\M\\Controller\\Homepage');
+
+      $controllers = glob('{'. App::$VENDOR_DIR .'/../app/controllers/*.php,'. App::$VENDOR_DIR .'/*/*/src/app/controllers/*.php}', GLOB_BRACE);
       foreach($controllers as $controller) {
         $basename = strtolower(basename($controller, '.php'));
         $path = str_replace('_', '-', $basename);

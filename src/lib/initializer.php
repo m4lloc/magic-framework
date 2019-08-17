@@ -1,6 +1,6 @@
 <?php
 
-  namespace Magic;
+  namespace M;
 
   class Initializer {
 
@@ -9,6 +9,7 @@
     private $initializers = [];
 
     public function init() {
+      // @TODO throw exception
       trigger_error('Every initializer should implement it\'s own init method' , E_USER_WARNING);
     }
 

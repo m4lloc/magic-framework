@@ -1,8 +1,8 @@
 <?php
 
-  namespace Magic\Core;
+  namespace M\Core;
 
-  abstract class Model {
+  abstract class Connect {
 
     public function truncate() {
 
@@ -65,10 +65,6 @@
     }
 
     public function find_by() {
-
-    }
-
-    public function join() {
 
     }
   }

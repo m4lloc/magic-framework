@@ -1,16 +1,9 @@
 <?php
 
-  class session extends \Magic\Initializer {
+  class session extends \M\Initializer {
 
     public function init() {
       session_start();
-      
-      if(!isset($_SESSION['account'])){
-        $_SESSION['account'] = array( );
-        $_SESSION['account']['login'] = false;
-        $_SESSION['account']['info'] = array(
-          'name' => 'Guest'
-        );
-      }
+      // @TODO set session timeout and lifetime
     }
   }
