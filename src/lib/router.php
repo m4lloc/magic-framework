@@ -56,12 +56,11 @@
       foreach($controllers as $controller) {
         $basename = strtolower(basename($controller, '.php'));
         $path = str_replace('_', '-', $basename);
-        $controller = '\\Magic\\Controller\\'. str_replace(' ', '', ucwords(str_replace('_', ' ', $basename)));
+        $controller = '\\M\\Controller\\'. str_replace(' ', '', ucwords(str_replace('_', ' ', $basename)));
 
         self::get('/'. $path, $controller .'::index');
         self::get('/'. $path .'/{id:\d+}', $controller .'::show');
         self::post('/'. $path  .'/{id:\d+}', $controller .'::update');
       }
-      self::draw(['GET','POST'], '/', '\\Magic\\Controller\\Homepage');
     }
   }

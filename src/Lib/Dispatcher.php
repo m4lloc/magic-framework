@@ -36,10 +36,10 @@
     private function determine_controller() {
       switch($this->route[0]) {
         case \FastRoute\Dispatcher::NOT_FOUND:
-          $this->class = '\\Magic\\Controller\\PageNotFound';
+          $this->class = '\\M\\Controller\\PageNotFound';
           break;
         case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-          $this->class = '\\Magic\\Controller\\MethodNotAllowed';
+          $this->class = '\\M\\Controller\\MethodNotAllowed';
           $params = ['allowed_methods' => $this->route[1]];
           echo 'NOT_FOUND'. PHP_EOL;
           $c = new \M\Controller\PageNotFound();
@@ -55,7 +55,7 @@
           list($this->class, $this->method) = explode('::', $this->route[1]);
           break;
         default:
-          $this->class = '\\Magic\\Controller\\NoRouteFound';
+          $this->class = '\\M\\Controller\\NoRouteFound';
       }
       if(!isset($this->method) || empty($this->method)) {
         $this->method = 'index';
