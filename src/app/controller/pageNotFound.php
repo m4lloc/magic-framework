@@ -18,8 +18,8 @@
    *
    */
 
-  namespace Magic\Controller;
+  namespace M\Controller;
 
-  class PageNotFound extends \Magic\Controller\Base\PageNotFound {
+  class PageNotFound extends \M\Controller\Base\PageNotFound {
     use PageNotFoundDecorator;
   }

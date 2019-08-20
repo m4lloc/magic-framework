@@ -18,9 +18,9 @@
    *
    */
 
-  namespace Magic\Controller;
+  namespace M\Controller;
 
-  class Homepage extends \Magic\Controller\Base\Homepage {
+  class Homepage extends \M\Controller\Base\Homepage {
     use HomepageDecorator;
 
   }

@@ -1,8 +1,8 @@
 <?php
 
-  namespace Magic\Controller\Base;
+  namespace M\Controller\Base;
 
-  class Homepage extends \Magic\Controller {
+  class Homepage extends \M\Controller {
 
     public function index($params = []) {
       echo 'Default';

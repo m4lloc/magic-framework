@@ -1,6 +1,6 @@
 <?php
-  namespace Magic\Controller\Base;
+  namespace M\Controller\Base;
 
-  class PageNotFound extends \Magic\Controller {
+  class PageNotFound extends \M\Controller {
     use PageNotFoundDecorator;
   }
