@@ -1,13 +1,15 @@
 <?php
 
-  class autoload extends \Magic\Initializer {
+  namespace M\Initializer;
+
+  class Autoload extends \M\Initializer {
 
     public function init() {
-      set_include_path( implode( PATH_SEPARATOR, array(
+      set_include_path(implode(PATH_SEPARATOR,[
         get_include_path(),
-        realpath('../app'),
-        realpath('../lib')
-      )));
+        realpath('../App'),
+        realpath('../Lib')
+      ]));
 
       spl_autoload_register(function($namespaced_trait) {
         if(trait_exists($namespaced_trait)) { return true; }

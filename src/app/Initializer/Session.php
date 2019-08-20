@@ -1,6 +1,8 @@
 <?php
 
-  class session extends \M\Initializer {
+  namespace M\Initializer;
+
+  class Session extends \M\Initializer {
 
     public function init() {
       session_start();

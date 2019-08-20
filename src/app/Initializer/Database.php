@@ -1,6 +1,8 @@
 <?php
 
-  class database extends \M\Initializer {
+  namespace M\Initializer;
+
+  class Database extends \M\Initializer {
 
     public function init() {
       // @TODO use environment variables
