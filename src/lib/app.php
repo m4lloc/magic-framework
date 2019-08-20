@@ -18,7 +18,7 @@
     }
 
     private function environment() {
-      $dotenv = new \Dotenv\Dotenv(getcwd() .'/..');
+      $dotenv = \Dotenv\Dotenv::create(getcwd() .'/..');
       $dotenv->load();
     }
 
