@@ -24,7 +24,7 @@
           }
         }
 
-        $trait_path = strtolower(str_replace('\\', '/', str_replace('Magic\\', '', $namespace)) .'/'. preg_replace('/(?<!^)[A-Z]/', '_$0', $trait) .'.php');
+        $trait_path = strtolower(str_replace('\\', '/', str_replace('M\\', '', $namespace)) .'/'. preg_replace('/(?<!^)[A-Z]/', '_$0', $trait) .'.php');
         $paths = explode(PATH_SEPARATOR, get_include_path());
         foreach($paths as $path) {
           if(file_exists($path .'/'. $trait_path)) {
