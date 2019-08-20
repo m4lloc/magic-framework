@@ -12,7 +12,7 @@
   // use function hasMany as hasMany;
   // use function execute as all;
 
-  namespace Magic;
+  namespace M;
 
   /*abstract*/ class Model {
     private $attributes = [];
