@@ -34,7 +34,7 @@
     }
 
     private function retrieve() {
-      $this->route_files = glob('{'. App::$VENDOR_DIR .'/../app/config/routes.php,'. App::$VENDOR_DIR .'/*/*/src/app/config/routes.php}', GLOB_BRACE);
+      $this->route_files = glob('{'. App::$VENDOR_DIR .'/../App/Routes.php,'. App::$VENDOR_DIR .'/*/*/src/App/Routes.php}', GLOB_BRACE);
     }
 
     private static function exists($route) {
@@ -52,7 +52,7 @@
     private function defaults() {
       Router::draw(['GET','POST'], '/', '\\M\\Controller\\Homepage');
 
-      $controllers = glob('{'. App::$VENDOR_DIR .'/../app/controllers/*.php,'. App::$VENDOR_DIR .'/*/*/src/app/controllers/*.php}', GLOB_BRACE);
+      $controllers = glob('{'. App::$VENDOR_DIR .'/../App/Controller/*.php,'. App::$VENDOR_DIR .'/*/*/src/App/Controller/*.php}', GLOB_BRACE);
       foreach($controllers as $controller) {
         $basename = strtolower(basename($controller, '.php'));
         $path = str_replace('_', '-', $basename);
