@@ -2,11 +2,11 @@
 
   namespace M\Initializer;
 
-  // clearstatcache();
-  //
-  // require_once( 'smarty/Smarty.class.php' );
-  //
-  // view::set_template_dir( '../view' );
-  // view::set_compile_dir( '../tmp/compile' );
+  class View extends \M\Initializer {
 
-  // @TODO set up view initializer
+    public function init() {
+      clearstatcache(); // @TODO is this one still required?
+      \M\View::set_template_dir('../view');
+      \M\View::set_compile_dir('/tmp/magic/compile');
+    }
+  }
