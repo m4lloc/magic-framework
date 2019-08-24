@@ -5,11 +5,11 @@
   class Error extends \M\Initializer {
 
     public function init() {
-      $dsn = getenv('SENTRY_DSN');
+      $dsn = getenv('SENTRY_DSN', '');
 
       if(!empty($dsn)) {
         \Sentry\init([
-          'dsn' => getenv('SENTRY_DSN'),
+          'dsn' => $dsn,
           'environment' => getenv('APP_ENV'),
         ]);
       }
