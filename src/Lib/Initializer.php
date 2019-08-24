@@ -29,7 +29,7 @@
       foreach($this->initializers as $initializer_file) {
         if(file_exists($initializer_file)) {
           require_once $initializer_file;
-          $class_name = basename($initializer_file, '.php');
+          $class_name = '\\M\\Initializer\\'. basename($initializer_file, '.php');
           if(class_exists($class_name)) {
             $initializers[] = $class_name;
           }
@@ -41,7 +41,8 @@
     private function sort() {
       $inits_by_order = [];
       foreach($this->initializers as $key => $initializer) {
-        $index = array_search($initializer::$before, array_keys($inits_by_order));
+        $before = (property_exists($initializer, 'before')) ?? $initializer::$before;
+        $index = array_search($before, array_keys($inits_by_order));
         $inits_by_order[$initializer] = $key-(int) $index;
       }
       asort($inits_by_order);
