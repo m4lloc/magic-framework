@@ -21,7 +21,7 @@
     }
 
     private function retrieve() {
-      $this->initializers = glob('{'. App::$VENDOR_DIR .'/../App/Initializer/*.php,'. App::$VENDOR_DIR .'/*/*/src/App/Initializer/*.php}', GLOB_BRACE);
+      $this->initializers = glob('{./src/App/Initializer/*.php,'. App::$VENDOR_DIR .'/../App/Initializer/*.php,'. App::$VENDOR_DIR .'/*/*/src/App/Initializer/*.php}', GLOB_BRACE);
     }
 
     private function require_files() {

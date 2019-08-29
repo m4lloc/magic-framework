@@ -17,8 +17,7 @@
     }
 
     private function isSentryEnabled() : bool {
-      $c = get_declared_classes();
-      if(in_array('Sentry\Client', $c)) {
+      if($this->isClassLoaded('Sentry\Client')) {
         return true;
       }
       return false;

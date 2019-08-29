@@ -29,7 +29,7 @@ First create a `composer.json` file and copy/paste the json below. After that ru
             "url": "https://github.com/m4lloc/magic-framework.git"
         }],
         "require": {
-        "m4lloc/magic-framework": "dev-master"
+            "m4lloc/magic-framework": "dev-master"
         }
     }
 
@@ -37,6 +37,17 @@ Since we are talking about starting a new clean project we can now run the comma
 
     vendor/bin/m init
 
+# Decorator pattern
+For some standard objects in the Magic Framework, you can use the decorator pattern to overwrite some methods within these objects. A good example is overwriting the Homepage controller `M\Controller\Homepage` to implement your own homepage functionalities. All you need to do for this to work is to create a new file with the example contents below and place it in the corresponding directory. So to overwrite the homepage controller we will create the file `src/App/Controller/HomepageDecorator.php` and copy/paste the code example from below.
+
+    <?php
+        
+        namespace M\Controller;
+
+        trait HomepageDecorator {
+            
+
+        }
 
 # Possible improvements
 * php-http/client-common suggests installing php-http/logger-plugin (PSR-3 Logger plugin)

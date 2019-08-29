@@ -4,7 +4,7 @@
 
   class App {
 
-    public static $VENDOR_DIR = '';
+    public static $VENDOR_DIR = '.';
 
     public function __construct() {
       self::$VENDOR_DIR = dirname(__FILE__, 5);

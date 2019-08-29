@@ -1,8 +1,6 @@
 <?php
 
-  use PHPUnit\Framework\TestCase;
-
-  final class OrmTest extends TestCase {
+  final class OrmTest extends \M\TestHelper {
 
       public function setUp() : void {
         (new \M\Orm())
