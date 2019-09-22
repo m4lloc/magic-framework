@@ -73,10 +73,10 @@
     private function render() {
       $basename = explode('\\', $this->class);
       $basename = end($basename);
-      $tpl = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $basename));
-      // var_dump($tpl);
+      $controller = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $basename));
+      
       View::assign('params', $this->params);
-      View::assign('body', View::fetch('../app/view/controller/'. $tpl .'/'. $this->method));
-      View::display('index');
+      View::assign('body', View::fetch('Controller/'. $controller .'/'. ucfirst($this->method)));
+      View::display('Main');
     }
   }

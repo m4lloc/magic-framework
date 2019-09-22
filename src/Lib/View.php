@@ -22,30 +22,39 @@
 			}
 		}
 
-		public static function instance() {
+		public static function instance() : \M\View {
 			if(!isset(self::$instance)) {
 				self::$instance = new self();
 			}
 			return self::$instance;
 		}
 
-		public static function set_template_dir($path) {
-			return self::instance()->smarty->setTemplateDir($path);
+		public static function addTemplateDir(string $path) {
+			return self::instance()->smarty->addTemplateDir($path);
 		}
 
-		public static function set_compile_dir($path) {
+		public static function addTemplateDirs(array $paths) {
+			return self::instance()->smarty->addTemplateDir($paths);
+		}
+
+		public static function setCompileDir(string $path) {
 			return self::instance()->smarty->setCompileDir($path);
 		}
 
-		public static function assign($name, $value) {
+		public static function assign(string $name, $value) {
 			return self::instance()->smarty->assign($name, $value);
 		}
 
-		public static function fetch($tpl) {
+
+		public static function assigned(string $name) {
+			return self::instance()->smarty->getTemplateVars($name);
+		}
+
+		public static function fetch(string $tpl) {
 			return self::instance()->smarty->fetch($tpl .'.tpl');
 		}
 
-		public static function display($tpl) {
+		public static function display(string $tpl) {
 			return self::instance()->smarty->display($tpl .'.tpl');
 		}
 	}

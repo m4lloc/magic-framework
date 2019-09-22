@@ -6,7 +6,10 @@
 
     public function init() {
       clearstatcache(); // @TODO is this one still required?
-      \M\View::set_template_dir('../view');
-      \M\View::set_compile_dir('/tmp/magic/compile');
+      \M\View::addTemplateDirs([
+        '../src/App/View',
+        // '../vendor/m4lloc/magic-framework/src/App/View',
+      ]);
+      \M\View::setCompileDir('/tmp/magic/compile');
     }
   }
