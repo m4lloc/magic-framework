@@ -7,7 +7,7 @@
     private $route;
     private $class;
     private $method;
-    private $params;
+    private $params = [];
 
     public function load() {
       $this->determine_route();
