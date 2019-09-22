@@ -7,7 +7,7 @@
 		private $smarty = null;
     private static $instance = null;
 
-		public function __set($name, $value) {
+		public function __set(string $name, $value) {
 			$this->$name = $value;
 			$this->assign($name, $this->$name);
 		}
