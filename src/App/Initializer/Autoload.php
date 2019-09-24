@@ -7,8 +7,8 @@
     public function init() {
       set_include_path(implode(PATH_SEPARATOR,[
         get_include_path(),
-        realpath('../App'),
-        realpath('../Lib')
+        realpath('../src/App'),
+        realpath('../src/Lib')
       ]));
 
       spl_autoload_register(function($namespaced_trait) {
@@ -24,7 +24,7 @@
           }
         }
 
-        $trait_path = strtolower(str_replace('\\', '/', str_replace('M\\', '', $namespace)) .'/'. preg_replace('/(?<!^)[A-Z]/', '_$0', $trait) .'.php');
+        $trait_path = str_replace('\\', '/', str_replace('M\\', '', $namespace)) .'/'. $trait .'.php';
         $paths = explode(PATH_SEPARATOR, get_include_path());
         foreach($paths as $path) {
           if(file_exists($path .'/'. $trait_path)) {
