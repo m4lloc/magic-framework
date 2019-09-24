@@ -41,18 +41,13 @@
         case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
           $this->class = '\\M\\Controller\\MethodNotAllowed';
           $params = ['allowed_methods' => $this->route[1]];
-          echo 'NOT_FOUND'. PHP_EOL;
-          $c = new \M\Controller\PageNotFound();
-          $c->index();
-          break;
-        case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
           echo 'METHOD_NOT_ALLOWED'. PHP_EOL;
-          // $allowedMethods = $routeInfo[1];
           $c = new \M\Controller\MethodNotAllowed();
           $c->index();
           break;
         case \FastRoute\Dispatcher::FOUND:
           list($this->class, $this->method) = explode('::', $this->route[1]);
+          $this->params = $this->route[2];
           break;
         default:
           $this->class = '\\M\\Controller\\NoRouteFound';
@@ -64,7 +59,6 @@
 
     private function invoke() {
       $controller = new $this->class;
-      // var_dump($controller);
       $controller->before();
       $controller->{$this->method}($this->params);
       $controller->after();

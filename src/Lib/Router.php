@@ -25,16 +25,20 @@
       }
     }
 
-    public static function get($route_pattern, $handler) {
+    public static function get(string $route_pattern, string $handler) : void {
       self::draw('GET', $route_pattern, $handler);
     }
 
-    public static function post($route_pattern, $handler) {
+    public static function post(string $route_pattern, string $handler) : void {
       self::draw('POST', $route_pattern, $handler);
     }
 
+    public static function getDeclaredRoutes() : array {
+      return self::$routes;
+    }
+
     private function retrieve() {
-      $this->route_files = glob('{'. App::$VENDOR_DIR .'/../App/Routes.php,'. App::$VENDOR_DIR .'/*/*/src/App/Routes.php}', GLOB_BRACE);
+      $this->route_files = glob('{'. App::$VENDOR_DIR .'/../src/App/Routes.php,'. App::$VENDOR_DIR .'/*/*/src/App/Routes.php}', GLOB_BRACE);
     }
 
     private static function exists($route) {
@@ -49,18 +53,25 @@
       }
     }
 
-    private function defaults() {
-      Router::draw(['GET','POST'], '/', '\\M\\Controller\\Homepage');
-
-      $controllers = glob('{'. App::$VENDOR_DIR .'/../App/Controller/*.php,'. App::$VENDOR_DIR .'/*/*/src/App/Controller/*.php}', GLOB_BRACE);
+    private function defaults() : void {
+      $controllers = glob('{'. App::$VENDOR_DIR .'/../src/App/Controller/*.php,'. App::$VENDOR_DIR .'/*/*/src/App/Controller/*.php}', GLOB_BRACE);
       foreach($controllers as $controller) {
-        $basename = strtolower(basename($controller, '.php'));
-        $path = str_replace('_', '-', $basename);
-        $controller = '\\M\\Controller\\'. str_replace(' ', '', ucwords(str_replace('_', ' ', $basename)));
+        if(substr($controller, -13) == 'Decorator.php') { continue; }
 
-        self::get('/'. $path, $controller .'::index');
-        self::get('/'. $path .'/{id:\d+}', $controller .'::show');
-        self::post('/'. $path  .'/{id:\d+}', $controller .'::update');
+        $controller = '\\M\\Controller\\'. basename($controller, '.php');
+        $path = $this->getPathForController($controller);
+
+        self::get($path, $controller .'::index');
+        self::get($path .'/{id:\d+}', $controller .'::show');
+        self::post($path  .'/{id:\d+}', $controller .'::update');
       }
+    }
+
+    private function getPathForController(string $controller) : string {
+      list(, , , $path) = explode('\\', $controller);
+      if(property_exists($controller, 'path')) {
+        $path = $controller::$path;
+      }
+      return '/'. rtrim(strtolower($path), '/');
     }
   }
