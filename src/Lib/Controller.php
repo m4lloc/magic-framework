@@ -8,7 +8,7 @@
 
     public function after() { }
 
-    public function index(array $params = []) {
+    public function index() {
       return false;
     }
 
@@ -31,10 +31,10 @@
     }
 
     public function __set(string $name, $value=null) {
-      View::assign($name, $value);
+      return View::assign($name, $value);
     }
 
-		public function &__get(string $name) {
-			View::assigned($name);
+		public function __get(string $name) {
+			return View::assigned($name);
     }
   }
