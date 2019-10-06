@@ -86,7 +86,7 @@
           ->build();
       }
 
-      public function testManuallyWrittenQuery() {
+      public function testManualWrittenQuery() {
         $r = \M\Orm::query('SELECT * FROM user WHERE id = :id LIMIT 1', [
           'id' => 1
         ]);
