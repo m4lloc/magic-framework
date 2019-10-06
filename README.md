@@ -46,8 +46,24 @@ For some standard objects in the Magic Framework, you can use the decorator patt
 
         trait HomepageDecorator {
             
-
         }
+
+# Adding a new controller
+When you want to add a new controller to your project, you need to create a new file in the `src/App/Controller` directory. Let's create a `Browse` controller to browse through some site content, for example. Create the file `src/App/Controller/Browse.php` and copy/paste the following contents in the file.
+
+    <?php
+        
+        namespace M\Controller;
+
+        class Browse extends \M\Controller {
+            
+        }
+
+It will automatically generate the routings for you to use, you just need to create a template file. Now we are going to create a new file in the `src/App/View/Controller` directory. The file structure is the same as for the controllers, except we have added the `/View` part and the name of the controller is now a directory. Let's create the template file `src/App/View/Controller/Browse/Index.tpl`, it's for the `index` action. If you want you can copy/paste the example template below or just write your own HTML.
+
+    <h1>Hello, world!</h1>
+    <p>This is where you can browse our content.</p>
+
 
 # Possible improvements
 * php-http/client-common suggests installing php-http/logger-plugin (PSR-3 Logger plugin)
